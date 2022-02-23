@@ -8,7 +8,7 @@ import {Colors} from "../assets/Colors"
 function MenuPage() {
   let navigate = useNavigate();
   const routeChange = () => {
-    navigate("/factpage");
+    navigate("/reportpage");
   };
   //bytte namn på branch
   return (

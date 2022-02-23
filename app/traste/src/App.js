@@ -53,7 +53,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<MenuPage />} />
         <Route
-          path="/factpage"
+          path="/reportpage"
           element={<ReportPage snackBarHandler={openSnackBar} />}
         />
       </Routes>
