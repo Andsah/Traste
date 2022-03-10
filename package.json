@@ -15,14 +15,23 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.26.0",
-    "babel-jest": "^27.5.1",
+    "chai": "^4.3.6",
     "cors": "^2.8.5",
+    "databaseSchemas": "file:./",
     "date-fns": "^2.28.0",
+    "express": "^4.17.2",
+    "express-json-validator-middleware": "^2.2.1",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.14.1",
+    "firestore": "^1.1.6",
+    "firestoreClient": "file:./",
+    "mocha": "^9.2.1",
+    "nyc": "^15.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^2.1.3",
     "react-test-renderer": "^17.0.2",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
@@ -39,10 +48,20 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run shell",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "mocha test",
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "coverage": "nyc --reporter=html npm run test",
+    "startapp": "react-scripts start",
+    "buildapp": "react-scripts build",
+    "testapp": "react-scripts test",
+    "ejectapp": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -63,13 +82,19 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.10.0",
+    "eslint": "^7.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.3",
+    "firebase-functions-test": "^0.2.0",
     "jest": "^27.5.1",
     "jest-watch-typeahead": "^0.6.5",
     "prettier": "^2.5.1"
-  }
+  },
+  "description": "Cloud Functions for Firebase",
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js"
 }
