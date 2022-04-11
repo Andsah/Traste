@@ -51,28 +51,18 @@ BootstrapDialogTitle.propTypes = {
 /**
  * hej
  * @return {div}
+ * @param {function} closeHandler
  */
-export default function CustomizedDialogs() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+export default function CustomizedDialogs({closeHandler, open}) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={closeHandler}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}
+        <BootstrapDialogTitle id="customized-dialog-title"
+          onClose={closeHandler}
         >
           Modal title
         </BootstrapDialogTitle>
@@ -88,7 +78,7 @@ export default function CustomizedDialogs() {
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={closeHandler}>
             Save changes
           </Button>
         </DialogActions>
@@ -96,3 +86,7 @@ export default function CustomizedDialogs() {
     </div>
   );
 }
+CustomizedDialogs.propTypes = {
+  closeHandler: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+};

@@ -12,13 +12,17 @@ import MaterialField from '../components/MaterialField';
 import {useForm, Controller} from 'react-hook-form';
 import Inputfield from '../components/Inputfield';
 import Selection from '../components/Selection';
-import CustomizedDialogs from '../components/Confirmation';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import {styled} from '@mui/material/styles';
 import {Colors} from '../assets/Colors';
 import SendIcon from '@mui/icons-material/Send';
 import CheckIcon from '@mui/icons-material/Check';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import IconButton from '@mui/material/IconButton';
 
 import PropTypes from 'prop-types';
 
@@ -29,7 +33,45 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import axios from 'axios';
 
 import {useNavigate} from 'react-router-dom';
+import CustomizedDialogs from '../components/Confirmation';
 
+const BootstrapDialog = styled(Dialog)(({theme}) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
+const BootstrapDialogTitle = (props) => {
+  const {children, onClose, ...other} = props;
+
+  return (
+    <DialogTitle sx={{m: 0, p: 2}} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+};
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
 
 const binsizes = [
   {
@@ -86,6 +128,14 @@ function ReportPage({snackBarHandler}) {
 
   const [docketCheck, setDocketCheck] = useState(0);
   const [wasteCheck, setWasteCheck] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClosed = () => {
+    setOpen(false);
+  };
 
   const [total, setTotal] = useState(0);
   const {
@@ -122,7 +172,6 @@ function ReportPage({snackBarHandler}) {
    */
   async function sendReport(data) {
     console.log('the data being sent before', data);
-
     // docketpicutre upload
     await axios({
       method: 'post',
@@ -677,12 +726,16 @@ function ReportPage({snackBarHandler}) {
             paddingTop: 1,
             paddingBottom: 1,
           }}
+          onClick={handleClickOpen}
         >
           <Typography variant="h4" sx={{color: Colors.trasteNavyBlue}}>
           Send Report
           </Typography>
         </Button>
-        <CustomizedDialogs></CustomizedDialogs>
+        <CustomizedDialogs
+          closeHandler={handleClosed}
+          open={open}
+        />
       </Stack>
     </form>
   );
