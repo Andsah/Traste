@@ -12,6 +12,7 @@ import MaterialField from '../components/MaterialField';
 import {useForm, Controller} from 'react-hook-form';
 import Inputfield from '../components/Inputfield';
 import Selection from '../components/Selection';
+import CustomizedDialogs from '../components/Confirmation';
 import {styled} from '@mui/material/styles';
 import {Colors} from '../assets/Colors';
 import SendIcon from '@mui/icons-material/Send';
@@ -658,7 +659,7 @@ function ReportPage({snackBarHandler}) {
             />
           }
           disabled={total !== 100}
-          type="submit"
+          // type="submit"
           sx={{
             flex: '1',
             display: 'flex',
@@ -681,6 +682,7 @@ function ReportPage({snackBarHandler}) {
           Send Report
           </Typography>
         </Button>
+        <CustomizedDialogs></CustomizedDialogs>
       </Stack>
     </form>
   );
