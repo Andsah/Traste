@@ -166,6 +166,7 @@ class FirestoreClient {
       }
       outList.push({...docData, ...o});
     }
+    outList.sort(compare);
     return JSON.stringify(outList);
   }
 }
@@ -198,6 +199,16 @@ async function deleteQueryBatch(db, query, resolve) {
   process.nextTick(() => {
     deleteQueryBatch(db, query, resolve);
   });
+}
+
+function compare(a, b) {
+  if (new Date(a.timestamps) < new Date(b.timestamps)) {
+    return 1;
+  }
+  if (new Date(a.timestamps) > new Date(b.timestamps)) {
+    return -1;
+  }
+  return 0;
 }
 
 module.exports = {FirestoreClient, uploadImage};
