@@ -84,6 +84,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
                   label="Date"
                   name="Date"
                   value={value}
+                  inputFormat='dd/MM/yyyy'
                   autoOK
                   minDate={new Date('2000-01-01T03:00:00')}
                   maxDate={new Date()}
