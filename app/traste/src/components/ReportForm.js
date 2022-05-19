@@ -77,7 +77,6 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
           <Controller
             name="date"
             control={control}
-            rules={{required: 'Select a valid date'}}
             render={({field: {onChange, value}}) => (
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
@@ -116,7 +115,6 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
             <Controller
               name="docketNumber"
               control={control}
-              rules={{required: 'Docket Number required'}}
               render={({field: {onChange, value}, fieldState: {error}}) => (
                 <Inputfield
                   label="Docket No."
@@ -147,7 +145,6 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
             name="weight"
             control={control}
             rules={{
-              required: 'Enter a valid number',
               validate: onlyNumbers,
             }}
             render={({field: {onChange, value}, fieldState: {error}}) => (
@@ -172,7 +169,6 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
           <Controller
             name="binSize"
             control={control}
-            rules={{required: 'Select a bin size'}}
             render={({field: {onChange, value}, fieldState: {error}}) => (
               <Selection
                 label="Bin Size"
@@ -187,7 +183,6 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
           <Controller
             name="site"
             control={control}
-            rules={{required: 'Select a site'}}
             render={({field: {onChange, value}, fieldState: {error}}) => (
               <Selection
                 label="Site"

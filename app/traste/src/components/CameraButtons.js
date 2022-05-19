@@ -36,7 +36,6 @@ function CameraButtons({control, useStateValue, setUseStateFunc, buttonId,
         <Controller
           name={name}
           control={control}
-          rules={{required: 'Select an image'}}
           render={({field: {onChange}, fieldState: {error}}) => (
 
             <Input
