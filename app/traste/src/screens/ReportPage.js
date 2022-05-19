@@ -113,6 +113,7 @@ function ReportPage({snackBarHandler}) {
 
   // fungerar inte för t.ex. 10e+12
   const onlyNumbers = (score) => !isNaN(parseInt(score)) && isFinite(score);
+  const onlyFloats = (score) => !isNaN(parseFloat(score)) && isFinite(score);
 
   const onSubmit = (data) => {
     data = {
@@ -152,6 +153,7 @@ function ReportPage({snackBarHandler}) {
         total={total}
         isValid={isValid}
         onlyNumbers={onlyNumbers}
+        onlyFloats={onlyFloats}
         handleClickOpen={handleClickOpen}
         setDocketURL={setDocketURL}
         setWasteURL={setWasteURL}

@@ -16,7 +16,7 @@ const reportSchema = {
       minLength: 1,
     },
     weight: {
-      type: "integer",
+      type: "number",
       minimum: 1,
     },
     timeStamps: {
