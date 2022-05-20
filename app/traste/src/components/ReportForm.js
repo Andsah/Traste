@@ -116,6 +116,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
             <Controller
               name="docketNumber"
               control={control}
+              rules={{required: 'Docket Number required'}}
               render={({field: {onChange, value}, fieldState: {error}}) => (
                 <Inputfield
                   label="Docket No."
@@ -298,7 +299,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
           endIcon={
             <SendIcon
               sx={{
-                color: total === 100 ?
+                color: isValid && total === 100 ?
                 Colors.trasteNavyBlue :
                 'rgba(0,50,0,0.2)',
                 fontSize: '200px',
@@ -307,7 +308,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
               }}
             />
           }
-          disabled={total !== 100}
+          disabled={!isValid || total !== 100}
           // type="submit"
           sx={{
             'flex': '1',
@@ -319,7 +320,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
             'width': 1,
             'zIndex': 2,
             'backgroundColor':
-            total === 100 ?
+            isValid && total === 100 ?
               Colors.trastePurple :
               'rgba(255,255,255,0.4)',
             'borderRadius': '0',
@@ -333,7 +334,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
 
           <Typography
             variant="h4"
-            sx={{color: total === 100 ?
+            sx={{color: isValid && total === 100 ?
               Colors.trasteNavyBlue :
               'rgba(0,50,0,0.2)'}}>
             Send Report
