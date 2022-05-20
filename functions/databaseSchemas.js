@@ -8,15 +8,15 @@ const reportSchema = {
     "wastePicture", "name", "weight", "timeStamps", "date", "binSize", "site"],
   properties: {
     docketNumber: {
-      type: "string",
+      type: ["string", "null"],
       minLength: 1,
     },
     name: {
-      type: "string",
+      type: ["string", "null"],
       minLength: 1,
     },
     weight: {
-      type: "integer",
+      type: ["number", "null"],
       minimum: 1,
     },
     timeStamps: {
@@ -28,19 +28,19 @@ const reportSchema = {
       minLength: 1,
     },
     docketPicture: {
-      type: "string",
+      type: ["string", "null"],
       minLength: 1,
     },
     wastePicture: {
-      type: "string",
+      type: ["string", "null"],
       minLength: 1,
     },
     binSize: {
-      type: "integer",
+      type: ["integer", "null"],
       minimum: 1,
     },
     site: {
-      type: "string",
+      type: ["string", "null"],
       minLength: 1,
     },
     wasteData: {

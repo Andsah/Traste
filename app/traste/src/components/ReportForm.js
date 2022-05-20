@@ -36,7 +36,7 @@ import CameraButtons from './CameraButtons';
  * @return {form} Returns the form that renders the report page.
  */
 function ReportForm({handleSubmit, onSubmit, control, total, isValid,
-  onlyNumbers, handleClickOpen, setDocketURL, setWasteURL}) {
+  onlyNumbers, onlyFloats, handleClickOpen, setDocketURL, setWasteURL}) {
   const [docketCheck, setDocketCheck] = useState(0);
   const [wasteCheck, setWasteCheck] = useState(0);
 
@@ -83,6 +83,7 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
                   label="Date"
                   name="Date"
                   value={value}
+                  inputFormat='dd/MM/yyyy'
                   autoOK
                   minDate={new Date('2000-01-01T03:00:00')}
                   maxDate={new Date()}
@@ -149,10 +150,10 @@ function ReportForm({handleSubmit, onSubmit, control, total, isValid,
                 label="Weight"
                 onChange={(e) => {
                   let tmpval = e.target.value;
-                  if (isNaN(parseInt(e.target.value, 10))) {
+                  if (isNaN(parseFloat(e.target.value, 10))) {
                     tmpval = 0;
                   } else {
-                    tmpval = parseInt(tmpval, 10);
+                    tmpval = parseFloat(tmpval, 10);
                   }
                   onChange(tmpval);
                 }}
@@ -350,6 +351,7 @@ ReportForm.propTypes = {
   total: PropTypes.number.isRequired,
   isValid: PropTypes.bool.isRequired,
   onlyNumbers: PropTypes.func.isRequired,
+  onlyFloats: PropTypes.func.isRequired,
   handleClickOpen: PropTypes.func.isRequired,
   setDocketURL: PropTypes.func.isRequired,
   setWasteURL: PropTypes.func.isRequired,

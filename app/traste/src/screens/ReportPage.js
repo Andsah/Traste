@@ -15,9 +15,11 @@ import {useNavigate} from 'react-router-dom';
 
 // Own files
 import ReportForm from '../components/ReportForm.js';
-import {BootstrapDialog, BootstrapDialogTitle} from '../assets/Constants';
+import {BootstrapDialog,
+  BootstrapDialogTitle,
+  longDate} from '../assets/Constants';
 import {uploadImageAPI, createReportAPI} from '../api/trasteApi';
-import {wasteTypes, successSx} from '../assets/Constants';
+import {wasteTypes, successSx, warningSx, errorSx} from '../assets/Constants';
 import {Colors} from '../assets/Colors.js';
 import CustomChart from '../components/Chart.js';
 
@@ -51,12 +53,12 @@ function ReportPage({snackBarHandler}) {
       docketNumber: '',
       docketPicture: null,
       wastePicture: null,
-      name: 'NULL',
-      weight: '',
-      binSize: '',
-      site: '',
+      name: null,
+      weight: null,
+      binSize: null,
+      site: null,
       wasteData: {...wasteTypes},
-      timeStamps: 'NULL',
+      timeStamps: null,
     },
   });
   const all = watch(control);
@@ -102,17 +104,18 @@ function ReportPage({snackBarHandler}) {
    */
   async function sendReport(data) {
     const report = {...data};
-    console.log('sent report', report);
+    console.log('send report', report);
     // Upload pictures to Firebase Storage.
     report.docketPicture = await uploadPicture(data.docketPicture);
     report.wastePicture = await uploadPicture(data.wastePicture);
-
+    console.log('sent images');
     // Create new report and return response.
     return await createReportAPI.post('', report);
   }
 
   // fungerar inte för t.ex. 10e+12
   const onlyNumbers = (score) => !isNaN(parseInt(score)) && isFinite(score);
+  const onlyFloats = (score) => !isNaN(parseFloat(score)) && isFinite(score);
 
   const onSubmit = (data) => {
     data = {
@@ -131,14 +134,17 @@ function ReportPage({snackBarHandler}) {
           );
         } else { // When res.body.msg === 'Report already exists'.
           snackBarHandler(
-              'An report with that docketnumber already exists!',
+              'A report with that docketnumber already exists!',
               'warning',
+              warningSx,
           );
         }
       }
     }).catch( (error) => {
       snackBarHandler('An Error occured, report was not sent',
-          'error');
+          'error',
+          errorSx,
+      );
     });
     navigate('/');
   };
@@ -152,6 +158,7 @@ function ReportPage({snackBarHandler}) {
         total={total}
         isValid={isValid}
         onlyNumbers={onlyNumbers}
+        onlyFloats={onlyFloats}
         handleClickOpen={handleClickOpen}
         setDocketURL={setDocketURL}
         setWasteURL={setWasteURL}
@@ -181,7 +188,8 @@ function ReportPage({snackBarHandler}) {
           <List sx={{pt: 0}}>
             <ListItem autoFocus>
               <ListItemText primary="Date"
-                secondary={new Date(all.date).toDateString()}
+                secondary={new Date(all.date)
+                    .toLocaleDateString('en-AU', longDate)}
                 primaryTypographyProps={{color: Colors.trasteNavyBlue}}
                 secondaryTypographyProps={{color: Colors.trasteNavyLight}}
               />

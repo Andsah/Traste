@@ -24,7 +24,7 @@ const data = {
   docketPicture: "https://firebasestorage.googleapis.com/v0/b/traste-71a71.appspot.com/o/c77e148c-81b0-4f7d-a41c-c84fc2166be3?alt=media&token=78437d98-28ec-402a-9e11-7a19079273d9",
   wastePicture: "https://firebasestorage.googleapis.com/v0/b/traste-71a71.appspot.com/o/c77e148c-81b0-4f7d-a41c-c84fc2166be3?alt=media&token=78437d98-28ec-402a-9e11-7a19079273d9",
   name: "NULL",
-  weight: 100,
+  weight: 1.8,
   binSize: 10,
   site: "Norrköping",
   wasteData: {
@@ -52,7 +52,7 @@ const data2 = {
   timeStamps: "NULL",
   wasteData: {"Wood": 0, "Plastic": 0, "Concrete": 0, "Metal": 0, "Other": 0},
   wastePicture: "https://rasmuscalle.com",
-  weight: "100",
+  weight: "3.2",
 };
 const data3 = {
   Concrete: "0",
@@ -69,7 +69,7 @@ const data3 = {
   timeStamps: "NULL",
   wasteData: {"Wood": 0, "Plastic": 0, "Concrete": 0, "Metal": 0, "Other": 0},
   wastePicture: "http://google.rasmus",
-  weight: 100,
+  weight: 2.4,
 };
 
 // lägg till after för att ta rapporten
@@ -134,7 +134,7 @@ describe("Integration Test for post function create report ", () => {
             done(error);
           } else {
             assert.equal(response.body.errors.body[0].message,
-                "should be integer");
+                "should be number");
             done();
           }
         });
