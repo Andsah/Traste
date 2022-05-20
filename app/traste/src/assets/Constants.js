@@ -54,6 +54,10 @@ export const wasteTypes = {
   Other: 0,
 };
 
+export const longDate = {year: 'numeric', month: 'short', day: 'numeric'};
+
+export const shortDate = {year: 'numeric', month: 'numeric', day: 'numeric'};
+
 export const sites = [
   {
     id: '0',

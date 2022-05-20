@@ -10,7 +10,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import {deleteReportAPI, getAllReportsAPI} from '../api/trasteApi';
-import {BootstrapDialog, BootstrapDialogTitle} from '../assets/Constants';
+import {BootstrapDialog,
+  BootstrapDialogTitle,
+  longDate, shortDate} from '../assets/Constants';
 import {Colors} from '../assets/Colors';
 import CustomChart from '../components/Chart.js';
 
@@ -154,7 +156,9 @@ function HistoryPage() {
                 id="panel1a-header">
 
                 <Typography color={'white'}>
-                  {item['Date: '] + ' - ' + item['Docket Number: ']}
+                  {new Date(item['Date: '])
+                      .toLocaleDateString('en-AU', shortDate) +
+                      '\xa0\xa0-\xa0\xa0' + item['Docket Number: ']}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -188,6 +192,14 @@ function HistoryPage() {
                       return;
                     } else if (key === 'Name: ') {
                       return;
+                    } else if (key === 'Date: ') {
+                      return (
+                        <ListItem key={index}>
+                          <ListItemText primary={key +
+                          new Date(value).toLocaleDateString('en-AU', longDate)}
+                          primaryTypographyProps={{color: 'white'}}/>
+                        </ListItem>
+                      );
                     } else {
                       return (
                         <ListItem key={index}>
