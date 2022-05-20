@@ -134,7 +134,7 @@ describe("Integration Test for post function create report ", () => {
             done(error);
           } else {
             assert.equal(response.body.errors.body[0].message,
-                "should be number");
+                "should be number,null");
             done();
           }
         });
