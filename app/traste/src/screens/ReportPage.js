@@ -51,14 +51,14 @@ function ReportPage({snackBarHandler}) {
     defaultValues: {
       date: new Date().toDateString(),
       docketNumber: '',
-      docketPicture: null,
-      wastePicture: null,
-      name: 'NULL',
-      weight: '',
-      binSize: '',
+      docketPicture: '',
+      wastePicture: '',
+      name: '',
+      weight: null,
+      binSize: null,
       site: '',
       wasteData: {...wasteTypes},
-      timeStamps: 'NULL',
+      timeStamps: '',
     },
   });
   const all = watch(control);
