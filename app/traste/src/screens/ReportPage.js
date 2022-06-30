@@ -15,7 +15,9 @@ import {useNavigate} from 'react-router-dom';
 
 // Own files
 import ReportForm from '../components/ReportForm.js';
-import {BootstrapDialog, BootstrapDialogTitle} from '../assets/Constants';
+import {BootstrapDialog,
+  BootstrapDialogTitle,
+  longDate} from '../assets/Constants';
 import {uploadImageAPI, createReportAPI} from '../api/trasteApi';
 import {wasteTypes, successSx} from '../assets/Constants';
 import {Colors} from '../assets/Colors.js';
@@ -49,14 +51,14 @@ function ReportPage({snackBarHandler}) {
     defaultValues: {
       date: new Date().toDateString(),
       docketNumber: '',
-      docketPicture: null,
-      wastePicture: null,
-      name: 'NULL',
-      weight: '',
-      binSize: '',
+      docketPicture: '',
+      wastePicture: '',
+      name: '',
+      weight: null,
+      binSize: null,
       site: '',
       wasteData: {...wasteTypes},
-      timeStamps: 'NULL',
+      timeStamps: '',
     },
   });
   const all = watch(control);
@@ -113,6 +115,7 @@ function ReportPage({snackBarHandler}) {
 
   // fungerar inte för t.ex. 10e+12
   const onlyNumbers = (score) => !isNaN(parseInt(score)) && isFinite(score);
+  const onlyFloats = (score) => !isNaN(parseFloat(score)) && isFinite(score);
 
   const onSubmit = (data) => {
     data = {
@@ -152,6 +155,7 @@ function ReportPage({snackBarHandler}) {
         total={total}
         isValid={isValid}
         onlyNumbers={onlyNumbers}
+        onlyFloats={onlyFloats}
         handleClickOpen={handleClickOpen}
         setDocketURL={setDocketURL}
         setWasteURL={setWasteURL}
@@ -181,7 +185,8 @@ function ReportPage({snackBarHandler}) {
           <List sx={{pt: 0}}>
             <ListItem autoFocus>
               <ListItemText primary="Date"
-                secondary={new Date(all.date).toDateString()}
+                secondary={new Date(all.date)
+                    .toLocaleDateString('en-AU', longDate)}
                 primaryTypographyProps={{color: Colors.trasteNavyBlue}}
                 secondaryTypographyProps={{color: Colors.trasteNavyLight}}
               />

@@ -12,36 +12,36 @@ const reportSchema = {
       minLength: 1,
     },
     name: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     weight: {
-      type: "integer",
-      minimum: 1,
+      type: ["number", "null"],
+      minimum: 0,
     },
     timeStamps: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     date: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     docketPicture: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     wastePicture: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     binSize: {
-      type: "integer",
-      minimum: 1,
+      type: ["integer", "null"],
+      minimum: 0,
     },
     site: {
-      type: "string",
-      minLength: 1,
+      type: ["string", "null"],
+      minLength: 0,
     },
     wasteData: {
       type: "object",
